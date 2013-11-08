@@ -1,0 +1,178 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Windows="clr-namespace:ScreenGrab.Windows">
+
+    <!--<ResourceDictionary>-->
+    <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="\Resources\ImageResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>-->
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <Windows:ColorBrushConverter x:Key="ColorBrushConverter" />
+
+    <!--<DataTemplate DataType="{x:Type ScreenGrab:GrabbedImage}">
+                <StackPanel>
+                    <Border BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="3"
+                            Margin="10" Padding="5">
+                        <Image Source="{Binding Thumbnail}" />
+                    </Border>
+                </StackPanel>
+            </DataTemplate>-->
+
+    <Style x:Key="HorizontalRadioButtonList"
+           TargetType="{x:Type ListBox}">
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="SelectedItem"
+                               Value="{x:Null}" />
+                    <Condition Property="HasItems"
+                               Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectedIndex"
+                        Value="0" />
+            </MultiTrigger>
+        </Style.Triggers>
+
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Background="Transparent"
+                                            Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Margin"
+                            Value="5" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Border BorderThickness="0"
+                                        Background="Transparent">
+                                    <RadioButton Focusable="False"
+                                                 Cursor="Hand"
+                                                 IsHitTestVisible="False"
+                                                 Style="{StaticResource {x:Type ToggleButton}}"
+                                                 IsChecked="{TemplateBinding IsSelected}">
+                                        <Rectangle Height="32"
+                                                   Width="32"
+                                                   Fill="{StaticResource ScreenBrush}" />
+                                    </RadioButton>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <Border BorderThickness="0"
+                            Padding="0"
+                            BorderBrush="Transparent"
+                            Background="Transparent"
+                            Name="Bd"
+                            SnapsToDevicePixels="True">
+                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <LinearGradientBrush x:Key="WindowBackgroundBrushKey">
+        <GradientStop Color="LightSteelBlue"
+                      Offset="0" />
+        <GradientStop Color="White"
+                      Offset="0.8" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ToolBarBrushKey"
+                         EndPoint="0.5,1"
+                         StartPoint="0.5,0">
+        <GradientStop Color="White"
+                      Offset="0" />
+        <GradientStop Color="LightSteelBlue"
+                      Offset="0.5" />
+    </LinearGradientBrush>
+
+    <Style TargetType="ListBoxItem">
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                             Color="LightSlateGray" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}"
+                             Color="Transparent" />
+        </Style.Resources>
+        <Setter Property="Opacity"
+                Value="0.5" />
+        <Style.Triggers>
+            <Trigger Property="IsSelected"
+                     Value="True">
+                <Setter Property="Opacity"
+                        Value="1.0" />
+            </Trigger>
+            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.2"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.2"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+        </Style.Triggers>
+
+    </Style>
+
+    <Style x:Key="ToolBarButtonStyle"
+           TargetType="{x:Type Button}">
+        <Setter Property="Height"
+                Value="32" />
+        <Setter Property="Width"
+                Value="32" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <!--<Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                                 Value="true">
+                        <Setter Property="Width" 
+                                    Value="50" />
+                    </Trigger>
+                </Style.Triggers>-->
+    </Style>
+
+    <Style x:Key="ToolBarButtonSeperator"
+           TargetType="{x:Type Rectangle}">
+        <Setter Property="Width"
+                Value="1" />
+        <Setter Property="Margin"
+                Value="7 3" />
+        <Setter Property="Fill"
+                Value="Gray" />
+    </Style>
+
+    <!--</ResourceDictionary>-->
+</ResourceDictionary>

@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="ScreenGrab.Controls.Options"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="clr-namespace:ScreenGrab.Controls" mc:Ignorable="d"
+             VerticalAlignment="Center"
+             HorizontalAlignment="Center"
+             Width="400">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Padding"
+                    Value="0" />
+        </Style>
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+
+    </UserControl.Resources>
+
+    <Controls:FormLayoutGrid Padding="5">
+        <Label Content="Show Screen Capture on..."/>
+
+        <RadioButton GroupName="CaptureScreen"
+                     IsChecked="{Binding ShowGrabOnCapturedScreen}"
+                     Content="Captured Screen"
+                     ToolTip="Show the screen capture on the screen that is being captured. Hold to CTRL when capturing a screen to force this option" />
+
+        <RadioButton GroupName="CaptureScreen"
+                     Grid.Column="1"
+                     IsChecked="{Binding ShowGrabOnActiveScreen}"
+                     Content="Active Screen"
+                     ToolTip="Show the screen capture on the active screen. Hold to SHIFT when capturing a screen to force this option" />
+
+        <RadioButton GroupName="CaptureScreen"
+                     Grid.Column="1"
+                     IsChecked="{Binding ShowGrabOnPrimaryScreen}"
+                     Content="Primary Screen"
+                     ToolTip="Show the screen capture on the primary screen. Hold to ALT when capturing a screen to force this option" />
+
+        <!-- row -->
+        <Label Content="Show shadow on preview"/>
+        
+        <CheckBox IsChecked="{Binding ShowShadowOnPreview}"
+                  x:Name="ShowShadowOnPreviewControl" />
+
+        <!-- row -->
+        <Label Content="Shadow Depth"
+               IsEnabled="{Binding ElementName=ShowShadowOnPreviewControl, Path=IsChecked}"
+               Padding="20 0 0 0" />
+
+        <TextBox MaxLength="10"
+                 Text="{Binding ShadowDepth}"
+                 IsEnabled="{Binding ElementName=ShowShadowOnPreviewControl, Path=IsChecked}" />
+
+        <!-- row -->
+        <Label Content="Keep shadow with Copy and Save"
+               IsEnabled="{Binding ElementName=ShowShadowOnPreviewControl, Path=IsChecked}"
+               Padding="20 0 0 0" />
+
+        <CheckBox IsChecked="{Binding KeepShadowOnCopyOrSave}"
+                  IsEnabled="{Binding ElementName=ShowShadowOnPreviewControl, Path=IsChecked}" />
+
+    </Controls:FormLayoutGrid>
+
+</UserControl>

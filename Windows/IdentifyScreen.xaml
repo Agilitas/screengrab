@@ -1,0 +1,20 @@
+<Window x:Class="ScreenGrab.Windows.IdentifyScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="IdentifyScreen" 
+        WindowStyle="None"
+        AllowsTransparency="True" 
+        Background="Transparent" 
+        WindowStartupLocation="Manual" 
+        ShowActivated="False"  
+        ShowInTaskbar="False" >
+    <Grid >
+        <TextBlock x:Name="_screenid"
+                   Text="?"
+                   FontSize="300"
+                   TextAlignment="Center" VerticalAlignment="Center"
+                   FontWeight="Bold"
+                   Opacity="0.5"
+                   Foreground="Gray" />
+    </Grid>
+</Window>
