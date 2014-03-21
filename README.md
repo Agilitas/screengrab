@@ -22,7 +22,3 @@ Wishlist
 * Blur effect
 * Text
 
-Issues
-------
-
-* Can crash occasionally - probably due to resources not being release properly
