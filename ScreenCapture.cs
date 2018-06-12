@@ -62,8 +62,11 @@ namespace ScreenGrab {
             drawingContext.PushOpacity(0.5);
 
             foreach (AnnotationHighlight highlight in Highlights) {
-                var rectangle = highlight.Rectangle;
-                drawingContext.DrawRectangle(highlight.Color, null, new Rect(highlight.TopLeft.X, highlight.TopLeft.Y, rectangle.Width, rectangle.Height));
+				if (highlight != null)  // overlapping highlights
+				{
+					var rectangle = highlight.Rectangle;
+					drawingContext.DrawRectangle(highlight.Color, null, new Rect(highlight.TopLeft.X, highlight.TopLeft.Y, rectangle.Width, rectangle.Height));
+				}
             }
 
             drawingContext.Close();
