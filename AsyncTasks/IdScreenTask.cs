@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Windows.Forms;
 
-namespace ScreenGrab.AsyncTasks{
+namespace ScreenGrab.AsyncTasks {
     class IdScreenTask {
 
         public Screen TheScreen { get; private set; }
